@@ -25,9 +25,8 @@ Le serveur DNS est placé sur le ROUTEUR car il a une visibilité sur les 2 rés
 ## Mise en place de la VLAN 
 
 * On crée l'id de la VLAN : `ip link add link eth0 name eth0.24 type vlan id 24`
-* On ajoute l'ip sur l`interface de la VLAN : `ip a add 10.0.24.24/24 dev eth0.24`
+* On ajoute l'ip sur l'interface de la VLAN : `ip a add 10.0.24.24/24 dev eth0.24`
 * On active l'ip de la VLAN : `ip link set up eth0.24`
-* On ajoute la route vers le serveur internet : `ip route add 192.168.24.0/24 via 10.0.24.254 dev eth0.24`
 * On test la connexion : `ping 192.168.18.1 `
 
 Notre VLAN est maintenant en place sur la machine INTERNE car c'est la partie privée du réseau qui est ségmentée.
