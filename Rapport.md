@@ -13,20 +13,18 @@
 ```
 zone "max-ibra.com" {
     type master;
-    file "/etc/bind/db.max-ibra.com";
+    file "/etc/bind/maxi.db";
 }
 ```
 
-
-
-* On crér le fichier de sauvegarde `/etc/bind/db.max-ibra.com`
+* On crée le fichier de sauvegarde `/etc/bind/maxi.db`
 * Enfin on peut redémarrer le DNS : `systemctl restart bind9`
 
 Le serveur DNS est placé sur le ROUTEUR car il a une visibilité sur les 2 réseaux. Grace à cela, le DNS peut donner les noms de domaine sur les 2 réseaux.
 
 ## Mise en place de la VLAN 
 
-* On crer l'id de la VLAN : `ip link add link eth0 name eth0.24 type vlan id 24`
+* On crée l'id de la VLAN : `ip link add link eth0 name eth0.24 type vlan id 24`
 * On ajoute l'ip sur l`interface de la VLAN : `ip a add 10.0.24.24/24 dev eth0.24`
 * On active l'ip de la VLAN : `ip link set up eth0.24`
 * On ajoute la route vers le serveur internet : `ip route add 192.168.24.0/24 via 10.0.24.254 dev eth0.24`
