@@ -38,16 +38,22 @@ Notre VLAN est maintenant en place sur la machine INTERNE car c'est la partie pr
 * On modifie la configuration du fichier `/etc/dhcp/dhcpd.conf` à l'aide de la commande nano, afin qu'il puisse donner des adresses sur le reseau INTRANET : 
 
 ```
+option domain-name "max-ibra.com";
+option domain-name-servers 192.168.24.24;
+
+authorative;
+default-lease-time 600;
+max-lease-time 7200;
+
 subnet 10.0.24.0 netmask 255.255.255.0 {
-    range 10.0.24.10 10.0.24.100;
-    option routers 10.0.24.254;
-    option domain-name-servers 10.0.24.254;
-    option domain-name "max-ibra.com";
-    host interne {
-        hardware ethernet <26:87:1c:97:9e:5e>;
-        fixed-address 10.0.24.24;
-    }
+  range 10.0.24.75 10.0.24.100;
+  option routers 10.0.24.254;
 }
+host I{
+  hardware ethernet 26:87:1c:97:9e:5e;
+  fixed-address 10.0.24.24;
+}
+
 ```
 
 * ENfin, on démarre le DHCP : `systemctl start isc-dhcp-server`
