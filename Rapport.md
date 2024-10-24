@@ -56,6 +56,13 @@ host I{
 
 ```
 
+* On modifie la configuration du `/etc/default/isc-dhcp-server` toujours avec la commande nano, afin qu'il attribue les adresses dans la sous-interface réseau eth0.24
+
+```
+
+
+```
+
 * ENfin, on démarre le DHCP : `systemctl start isc-dhcp-server`
 
 Notre serveur DHCP est maintenant en place sur le ROUTEUR. Il peut donc attribuer les adresses IP en connaissant les différents routages 
