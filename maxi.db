@@ -1,0 +1,12 @@
+$ttl 38400
+@	IN	SOA	sae.max-ibra.com. postmaster.sae.max-ibra.com. (
+		1	; Numero de serie, a incrementer a chaque modification
+		10800	; Rafraichissement
+		3600	; Nouvel essai apres 1 heure
+		604800	; Obsolescence apres 1 semaine
+		86400 )	; TTL minimale de 1 jour
+	
+	IN	NS	sae.max-ibra.com.
+sae	IN	A	192.168.24.24
+ROUTEUR IN	CNAME	sae
+www	IN	A	10.0.24.24
