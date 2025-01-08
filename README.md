@@ -18,7 +18,7 @@ _A noter, pour les téléchargement de paquets comme le service bind9, vous deve
 zone "max-ibra.com" {
     type master;
     file "/etc/bind/maxi.db";
-}
+};
 ```
 
 * On crée le fichier de zone `/etc/bind/maxi.db`
@@ -87,9 +87,31 @@ Notre VLAN est maintenant en place sur la machine INTERNE.
 
 ##  Configuration du HTTP 
 
-* On installe 'apache2' : 'apt install apache2' 
-* On configure le nat pour que le serveur réponde sur le port 80 et soit accessible via http://ROUTEUR:8080 depuis EXTERNE
+* On installe 'apache2' : 'apt install apache2'
+* On ajoute notre site mvc au répertoire '/var/www/html' ( recuperer le site dans l'archive 'site.tar' du git )
 
+* On lance le mode rewrite : 'a2enmod rewrite'
+* On modifie le fichier du site : 'nano /etc/apache2/sites-available/000-default.conf'
+```                                   
+<VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+
+        RewriteEngine On
+        RewriteRule ^$ /../Home [R=301,L]
+
+        <Directory /var/www/html/ >
+                AllowOverride All
+        </Directory>
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+* On relance apache2 : 'service apache2 restart'
+
+# ROUTEUR
+* On configure le nat pour que le serveur réponde sur le port 80 et soit accessible via http://ROUTEUR:8080 depuis EXTERNE
+'iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to 10.0.24.24'
 
 
 
