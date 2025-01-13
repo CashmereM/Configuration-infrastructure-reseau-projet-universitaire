@@ -1,4 +1,4 @@
-<img src=SchemaReseau.png alt="" width="200"/>
+<img src=SchemaReseau.png alt="" width="800"/>
 
 
 # Configuration réseau
