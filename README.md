@@ -1,3 +1,6 @@
+<img src=SchemaReseau.png alt="" width="200"/>
+
+
 # Configuration réseau
 
 * IP INTERNE  : `10.0.24.24/24`
