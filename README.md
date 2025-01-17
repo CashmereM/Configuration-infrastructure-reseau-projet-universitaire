@@ -17,6 +17,11 @@ _A noter, pour les téléchargement de paquets comme le service bind9, vous deve
 * On active l'interface eht0.24 de la VLAN : `ip link set up eth0.24`
 * On ajoute l'ip sur l'interface de la VLAN : `ip a add 10.0.24.254/24 dev eth0.24`
 
+# DNS
+
+* On active l'interface eth0 : `ip link set up eth0`
+* On ajoute l'adresse sur l'interface eth0 :`ip a add 10.0.24.5/24`
+
 ## Configuration du DNS
 
 * On installe le DNS avec bind9 sur le Routeur : `apt-get install bind9`
@@ -33,6 +38,12 @@ zone "max-ibra.com" {
 * Enfin on peut redémarrer le DNS : `systemctl restart bind9`
 
 Le serveur DNS est placé sur le ROUTEUR car il a une visibilité sur les 2 réseaux. Grace à cela, le DNS peut donner les noms de domaine sur les 2 réseaux.
+
+## Mise en place de la VLAN 
+* On active l'interface eth0 : `ip link set up eth0`
+* On crée l'id de la VLAN : `ip link add link eth0 name eth0.24 type vlan id 24`
+* On active l'interface eht0.24 de la VLAN : `ip link set up eth0.24`
+* On ajoute l'ip sur l'interface de la VLAN : `ip a add 10.0.24.5/24 dev eth0.24`
 
 # DHCP
 ## Mise en place de la VLAN 
