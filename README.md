@@ -21,9 +21,6 @@ _A noter, pour les téléchargement de paquets comme le service bind9, vous deve
 
 # DNS
 
-* On active l'interface eth0 : `ip link set up eth0`
-* On ajoute l'adresse sur l'interface eth0 :`ip a add 10.0.24.5/24`
-
 ## Configuration du DNS
 
 * On installe le DNS avec bind9 sur le Routeur : `apt-get install bind9`
