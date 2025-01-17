@@ -1,6 +1,5 @@
 <img src=SchemaReseau.jpg alt="" width="800"/>
 
-*Externe en .1
 
 # Configuration réseau
 
