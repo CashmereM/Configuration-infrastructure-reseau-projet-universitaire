@@ -74,7 +74,7 @@ INTERFACESv6=""
 
 * ENfin, on démarre le DHCP : `systemctl start isc-dhcp-server`
 
-Notre serveur DHCP est maintenant en place sur le ROUTEUR. Il peut donc attribuer les adresses IP en connaissant les différents routages 
+Notre serveur DHCP est maintenant en place. Il peut donc attribuer les adresses IP en connaissant les différents routages 
 
 # INTERNE
 
