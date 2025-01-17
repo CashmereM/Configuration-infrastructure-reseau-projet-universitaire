@@ -61,7 +61,10 @@ Notre VLAN est maintenant en place sur la machine DHCP. ( On a segmenté le rés
 
 ```
 option domain-name "max-ibra.com";
-option domain-name-servers 10.0.24.5;
+option domain-name-servers 10.0.24.5, 172.21.0.203, 172.21.0.204;
+option domain-search "ad.iut-nantes.univ-nantes.prive";
+option domain-search "iut-nantes.univ-nantes.prive";
+
 
 authorative;
 default-lease-time 600;
@@ -72,9 +75,23 @@ subnet 10.0.24.0 netmask 255.255.255.0 {
   option routers 10.0.24.254;
 }
 host I{
-  hardware ethernet 26:87:1c:97:9e:5e; #A changer en fonction de l'adresse MAC de la machine Interne
+  hardware ethernet 3e:41:90:ea:2b:a3; #A changer en fonction de l'adresse MAC de la machine Interne
   fixed-address 10.0.24.24;
+  option routers 10.0.24.254;
 }
+
+host DNS{
+  hardware ethernet de:15:9a:7f:4d:c0; #A changer en fonction de l'adresse MAC de la machine DNS
+  fixed-address 10.0.24.5;
+  option routers 10.0.24.254;
+}
+
+host ROUTEUR{
+  hardware ethernet a6:dc:42:23:dc:50; #A changer en fonction de l'adresse MAC de la machine Routeur
+  fixed-address 10.0.24.254;
+}
+
+
 
 ```
 
