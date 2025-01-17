@@ -96,11 +96,6 @@ host DNS{
   option routers 10.0.24.254;
 }
 
-host ROUTEUR{
-  hardware ethernet a6:dc:42:23:dc:50; #A changer en fonction de l'adresse MAC de la machine Routeur
-  fixed-address 10.0.24.254;
-}
-
 
 
 ```
