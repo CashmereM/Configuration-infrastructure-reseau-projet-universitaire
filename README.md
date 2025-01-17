@@ -8,7 +8,7 @@
 * IP EXTERNE  : `192.168.24.1/24`
 * IP ROUTEUR  : `10.0.24.254/24` et `192.168.24.24/24`
 * IP DHCP     : `10.0.24.1/24`
-* IP DHCP     : `10.0.24.5/24`
+* IP DNS     : `10.0.24.5/24`
 
 _A noter, pour les téléchargement de paquets comme le service bind9, vous devez lancer la commande une fois `apt update` juste avant d'effectuer les téléchargements de paquets_
 
@@ -62,7 +62,7 @@ Notre VLAN est maintenant en place sur la machine DHCP. ( On a segmenté le rés
 
 ```
 option domain-name "max-ibra.com";
-option domain-name-servers 192.168.24.24;
+option domain-name-servers 10.0.24.5;
 
 authorative;
 default-lease-time 600;
