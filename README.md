@@ -11,6 +11,11 @@
 _A noter, pour les téléchargement de paquets comme le service bind9, vous devez lancer la commande une fois `apt update` juste avant d'effectuer les téléchargements de paquets_
 
 # ROUTEUR
+## Mise en place de la VLAN 
+* On active l'interface eth0 : `ip link set up eth0`
+* On crée l'id de la VLAN : `ip link add link eth0 name eth0.24 type vlan id 24`
+* On active l'interface eht0.24 de la VLAN : `ip link set up eth0.24`
+* On ajoute l'ip sur l'interface de la VLAN : `ip a add 10.0.24.254/24 dev eth0.24`
 
 ## Configuration du DNS
 
@@ -36,7 +41,6 @@ Le serveur DNS est placé sur le ROUTEUR car il a une visibilité sur les 2 rés
 * On crée l'id de la VLAN : `ip link add link eth0 name eth0.24 type vlan id 24`
 * On active l'interface eht0.24 de la VLAN : `ip link set up eth0.24`
 * On ajoute l'ip sur l'interface de la VLAN : `ip a add 10.0.24.1/24 dev eth0.24`
-* On test la connexion : `ping 192.168.18.1`
 
 Notre VLAN est maintenant en place sur la machine DHCP. ( On a segmenté le réseau 10.0.24.0 et on va configurer notre serveur DHCP dans ce segment de réseau )
 
@@ -84,7 +88,6 @@ Notre serveur DHCP est maintenant en place. Il peut donc attribuer les adresses 
 * On crée l'id de la VLAN : `ip link add link eth0 name eth0.24 type vlan id 24`
 * On active l'interface eth0.24 de la VLAN : `ip link set up eth0.24`
 * On execute la commande : `dhclient` pour que le serveur nous attribue notre adresse
-* On test la connexion : `ping 192.168.18.1 `
 
 Notre VLAN est maintenant en place sur la machine INTERNE.
 
