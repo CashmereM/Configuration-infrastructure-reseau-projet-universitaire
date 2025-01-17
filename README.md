@@ -18,6 +18,15 @@ _A noter, pour les téléchargement de paquets comme le service bind9, vous deve
 * On active l'interface eht0.24 de la VLAN : `ip link set up eth0.24`
 * On ajoute l'ip sur l'interface de la VLAN : `ip a add 10.0.24.254/24 dev eth0.24`
 
+
+
+* On ajoute une adresse ip au routeur dans le réseau `192.168.24.0/24` sur l'interface eth1
+```
+ip link set eth1 up
+ip a add 192.168.24.24/24 dev eth1
+```
+
+
 # DNS
 
 ## Configuration du DNS
@@ -42,6 +51,7 @@ Le serveur DNS est placé sur le ROUTEUR car il a une visibilité sur les 2 rés
 * On crée l'id de la VLAN : `ip link add link eth0 name eth0.24 type vlan id 24`
 * On active l'interface eht0.24 de la VLAN : `ip link set up eth0.24`
 * On ajoute l'ip sur l'interface de la VLAN : `ip a add 10.0.24.5/24 dev eth0.24`
+
 
 # DHCP
 ## Mise en place de la VLAN 
@@ -130,7 +140,6 @@ Notre VLAN est maintenant en place sur la machine INTERNE.
         DocumentRoot /var/www/html
 
         RewriteEngine On
-        RewriteRule ^$ /../Home [R=301,L]
 
         <Directory /var/www/html/ >
                 AllowOverride All
@@ -145,5 +154,12 @@ Notre VLAN est maintenant en place sur la machine INTERNE.
 * On configure le nat pour que le serveur réponde sur le port 80 et soit accessible via http://ROUTEUR:8080 depuis EXTERNE
 `iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to 10.0.24.24` #A tester
 
+
+# EXTERNE
+* On ajoute une adresse ip à la machine Externe dans le réseau `192.168.24.0/24` sur l'interface eth1
+```
+ip link set eth1 up
+ip a add 192.168.24.1/24 dev eth1
+```
 
 
