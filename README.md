@@ -1,4 +1,31 @@
+# Contexte
+
+Dans le cadre de la ressource Réseaux de ma 2e année de BUT Informatique, j'ai réalisé en binôme la mise en place d'une infrastructure réseau complète un environnement d'entreprise. 
+
+L'objectif de ce projet était de comprendre et appliquer les concepts fondamentaux de l'administration réseau, notamment :
+- la segmentation réseau via VLAN,
+- la configuration d’un routeur assurant le routage entre réseaux interne et externe,
+- la mise en place de services essentiels tels que DHCP et DNS,
+- l’hébergement d’un serveur web accessible depuis un réseau externe via du NAT.
+
+L’infrastructure mise en place repose sur deux réseaux distincts :
+
+un réseau interne (10.0.24.0/24) destiné aux machines locales,
+un réseau externe (192.168.24.0/24) simulant un accès public.
+
+Nous avons configuré plusieurs machines avec des rôles spécifiques (routeur, serveur DHCP, serveur DNS, client interne, client externe) afin de reproduire une architecture réaliste. A noter que, le serveur DNS et le routeur sont, par choix et par contrainte matérielle, sur la même machine mais pourrait tout deux être séparés dans deux machines distinctes. Cela nécessiterai deux faire une redirection des requetes DNS par le Routeur sur l'emplacement du serveur DNS.
+
+Ce projet nous a permis de mettre en pratique des compétences en configuration système et réseau sous Linux, ainsi qu’en gestion des services réseau.
+ 
+<br>
 <img src=SchemaReseau.jpg alt="" width="800"/>
+
+## Services utilisés
+
+- Le paquet `isc-dhcp-server` a été utilisé pour la mise en place du serveur DHCP
+- Le paquet `bind9` a été utilisé pour la mise en place et configuration du serveur DNS
+- Le paquet `apache2` a été utilisé pour le déploiement du site web sur la machine `INTERNE`
+- Le firewall et le NAT a été configurés avec le paquet `iptables`.
 
 
 # Configuration réseau
@@ -29,9 +56,15 @@ ip a add 192.168.24.24/24 dev eth1
 
 # DNS
 
-## Configuration du DNS
+## Mise en place de la VLAN 
+* On active l'interface eth0 : `ip link set up eth0`
+* On crée l'id de la VLAN : `ip link add link eth0 name eth0.24 type vlan id 24`
+* On active l'interface eht0.24 de la VLAN : `ip link set up eth0.24`
+* On ajoute l'ip sur l'interface de la VLAN : `ip a add 10.0.24.5/24 dev eth0.24`
 
-* On installe le DNS avec bind9 sur le Routeur : `apt-get install bind9`
+## Configuration du serveur DNS
+
+* On configure le serveur DNS avec bind9 sur le Routeur : `apt-get install bind9`
 * On ajoute la zone "max-ibra.com" dans /etc/bind/named.conf.local à l'aide de la commande nano ( ou autre editeur de texte) : 
 
 ```
@@ -46,11 +79,6 @@ zone "max-ibra.com" {
 
 Le serveur DNS est placé sur le ROUTEUR car il a une visibilité sur les 2 réseaux. Grace à cela, le DNS peut donner les noms de domaine sur les 2 réseaux.
 
-## Mise en place de la VLAN 
-* On active l'interface eth0 : `ip link set up eth0`
-* On crée l'id de la VLAN : `ip link add link eth0 name eth0.24 type vlan id 24`
-* On active l'interface eht0.24 de la VLAN : `ip link set up eth0.24`
-* On ajoute l'ip sur l'interface de la VLAN : `ip a add 10.0.24.5/24 dev eth0.24`
 
 
 # DHCP
