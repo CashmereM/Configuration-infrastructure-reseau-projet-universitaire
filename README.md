@@ -1,28 +1,32 @@
 # Contexte
 
-Dans le cadre de la ressource Réseaux de ma 2e année de BUT Informatique, j'ai réalisé en binôme la mise en place d'une infrastructure réseau complète un environnement d'entreprise. 
+Dans le cadre de la ressource Réseaux de ma 2e année de BUT Informatique, j’ai réalisé en binôme la mise en place d’une infrastructure réseau d'un environnement d’entreprise.
 
-L'objectif de ce projet était de comprendre et appliquer les concepts fondamentaux de l'administration réseau, notamment :
-- la segmentation réseau via VLAN,
-- la configuration d’un routeur assurant le routage entre réseaux interne et externe,
-- la mise en place de services essentiels tels que DHCP et DNS,
-- l’hébergement d’un serveur web accessible depuis un réseau externe via du NAT.
+L’objectif de ce projet était de comprendre et d’appliquer les concepts fondamentaux de l’administration réseau, notamment :
+
+la segmentation du réseau via des VLAN,
+la configuration d’un routeur assurant le routage entre les réseaux interne et externe,
+la mise en place de services essentiels tels que DHCP et DNS,
+l’hébergement d’un serveur web accessible depuis un réseau externe via du NAT.
 
 L’infrastructure mise en place repose sur deux réseaux distincts :
 
 un réseau interne (10.0.24.0/24) destiné aux machines locales,
 un réseau externe (192.168.24.0/24) simulant un accès public.
 
-Nous avons configuré plusieurs machines avec des rôles spécifiques (routeur, serveur DHCP, serveur DNS, client interne, client externe) afin de reproduire une architecture réaliste. A noter que, le serveur DNS et le routeur sont, par choix et par contrainte matérielle, sur la même machine mais pourrait tout deux être séparés dans deux machines distinctes. Cela nécessiterai deux faire une redirection des requetes DNS par le Routeur sur l'emplacement du serveur DNS.
+Nous avons configuré plusieurs machines avec des rôles spécifiques (routeur, serveur DHCP, serveur DNS, client interne, client externe) afin de reproduire une architecture réaliste.
+
+À noter que le serveur DNS et le routeur sont, par choix et par contrainte matérielle, sur la même machine, mais pourraient tous deux être séparés sur deux machines distinctes. Cela nécessiterait de faire une redirection des requêtes DNS reçus par le routeur vers l’emplacement du serveur DNS.
 
 Ce projet nous a permis de mettre en pratique des compétences en configuration système et réseau sous Linux, ainsi qu’en gestion des services réseau.
- 
+
 <br>
 <img src=SchemaReseau.jpg alt="" width="800"/>
 
 ## Services utilisés
 
 - Le paquet `isc-dhcp-server` a été utilisé pour la mise en place du serveur DHCP
+- Le paquet `isc-dhcp-client` utilisé par les clients demandants une adresse ip dynamique au serveur DHCP (Pour installer le client dhclient si pas installé sur la machine, `sudo apt install isc-dhcp-client`)
 - Le paquet `bind9` a été utilisé pour la mise en place et configuration du serveur DNS
 - Le paquet `apache2` a été utilisé pour le déploiement du site web sur la machine `INTERNE`
 - Le firewall et le NAT a été configurés avec le paquet `iptables`.
